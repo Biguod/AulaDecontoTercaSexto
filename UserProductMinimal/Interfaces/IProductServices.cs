@@ -4,6 +4,9 @@ namespace UserProductMinimal.Interfaces
 {
     public interface IProductServices
     {
-        public List<Product> GetProducts();
+        IEnumerable<Product> GetProducts();
+        Product CreateOrEditProduct(Product product);
+        void DeleteProduct(int productId);
+        Product GetProductById(int productId);
     }
 }

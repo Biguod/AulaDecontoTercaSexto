@@ -6,6 +6,9 @@ using UserProductMinimal.Interfaces;
 using UserProductMinimal.Service;
 using UserProductMinimal;
 using UserProductMinimal.Endpoints;
+using UserProductMinimal.Contexts;
+using Microsoft.EntityFrameworkCore;
+using UserProductMinimal.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,15 +20,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //DI Repository
-//builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 //DI Services
 builder.Services.AddScoped<IProductServices, ProductService>();
 
 
 
-//builder.Services.AddDbContext<EFContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"))); //Definindo banco
-//builder.Services.AddScoped<EFContext, EFContext>();
+builder.Services.AddDbContext<DataBaseContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"))); //Definindo banco
+builder.Services.AddScoped<DataBaseContext, DataBaseContext>();
 
 //ExtensionsMethods
 builder.Services.SetCorsConfig();
